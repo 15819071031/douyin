@@ -1,0 +1,52 @@
+server:
+  port: 8090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://192.168.1.166:3306/xmzy_chat?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.31.210:3306/xmzy_sd?useUnicode=true&characterEncoding=utf-8
+    #    username: root
+    username: root
+    password: xmzy1234
+
+# ADB 配置
+adb:
+  path: D:/adb/adb.exe
+  device-id: 192.168.31.95:37667  # 设备ID，通过 adb devices 查看
+
+# 通义千问配置
+qwen:
+  api-key: "sk-05bb8ddb7d7147d3a5d443496d095d42"
+  model: "qwen-plus"
+
+# OCR 识别配置
+ocr:
+  # OCR引擎类型: tesseract 或 paddleocr
+  engine: tesseract
+  # Tesseract安装目录（包含tesseract.exe）
+  # Windows下载: https://github.com/UB-Mannheim/tesseract/wiki
+  tesseract-path: D:/Tesseract-OCR
+  # Tesseract数据目录路径（包含训练数据）
+  tess-data-path: D:/Tesseract-OCR/tessdata
+  # 识别语言，chi_sim=简体中文，eng=英文
+  language: chi_sim+eng
+  # PaddleOCR服务地址（如果使用PaddleOCR）
+  # 启动命令: paddleocr --use_gpu false --port 8866
+  paddle-ocr-url: http://localhost:8866/ocr
+  # 截图保存目录
+  screenshot-dir: D:/douyin_screenshots
+  # 评论区域裁剪配置（根据实际设备分辨率调整）
+  # 抖音评论区通常在屏幕下半部分，跳过顶部视频区域
+  comment-area-x: 150         # 跳过左侧头像区域（头像约150像素宽）
+  comment-area-y: 1100        # 调整起始位置，跳过视频区域
+  comment-area-width: 800     # 只截取文字部分，不包括右侧点赞图标
+  comment-area-height: 1400   # 评论区域高度
+
+# 抖音 RPA 配置
+douyin:
+  comment:
+    min-count: 2        # 每个视频最少获取评论数
+    max-count: 5        # 每个视频最多获取评论数
+    video-count: 10     # 每次任务刷取视频数
+    interval-ms: 3000   # 操作间隔（毫秒）
