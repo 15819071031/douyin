@@ -1,0 +1,104 @@
+# SmartOCR 应用配置
+spring:
+  application:
+    name: SmartOCR
+
+  # SQLite数据库配置
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:./data/smart_ocr.db
+    # SQLite不需要用户名密码
+    username:
+    password:
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    # 驼峰命名自动转换
+    map-underscore-to-camel-case: true
+    # 日志输出
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    db-config:
+      # SQLite自增主键
+      id-type: auto
+  # Mapper XML位置
+  mapper-locations: classpath:/mapper/*.xml
+
+# ADB配置
+adb:
+  # ADB可执行文件路径
+  path: D:/adb/adb.exe
+  # 设备ID（通过 adb devices 查看）
+  device-id: 127.0.0.1:5555
+  # 屏幕尺寸
+  screen-width: 1080
+  screen-height: 2400
+  # 点赞按钮坐标（右侧）
+  like-button-x: 980
+  like-button-y: 880
+  # 视频文字识别区域
+  video-text-area-x: 50
+  video-text-area-y: 400
+  video-text-area-width: 900
+  video-text-area-height: 1200
+
+# OCR配置
+ocr:
+  # OCR引擎：tesseract 或 paddleocr
+  engine: tesseract
+  # Tesseract安装路径（Windows）
+  tesseract-path: C:/Program Files/Tesseract-OCR
+  # Tesseract数据文件路径
+  tessdata-path: C:/Program Files/Tesseract-OCR/tessdata
+  # PaddleOCR服务地址（如果使用PaddleOCR）
+  paddle-ocr-url: http://localhost:8866/ocr
+  # 识别语言：chi_sim(简体中文) chi_tra(繁体中文) eng(英文)
+  language: chi_sim+eng
+  # 临时文件目录
+  temp-dir: ./temp/ocr
+  # 图像预处理选项
+  enable-grayscale: true
+  enable-binarize: true
+  binarize-threshold: 180
+  enable-denoise: true
+
+# AI配置（通义千问）
+ai:
+  # 通义千问API Key（请替换为您的API Key）
+  api-key: ${DASHSCOPE_API_KEY:}
+  # 模型名称
+  model: qwen-plus
+  # 快速模型
+  fast-model: qwen-turbo
+  # 请求超时时间（秒）
+  timeout: 30
+  # 最大Token数
+  max-tokens: 2000
+  # 翻译目标语言
+  translate-target-lang: 中文
+
+# 应用配置
+app:
+  # 截图热键
+  screenshot-hotkey: F4
+  # 是否开机自启
+  auto-start: false
+  # 是否启动时最小化
+  start-minimized: false
+  # 历史记录保留天数
+  history-retention-days: 30
+  # 最大历史记录数
+  max-history-count: 1000
+  # 是否自动复制识别结果
+  auto-copy-result: true
+  # 截图后是否自动识别
+  auto-recognize: true
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.smart.ocr: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

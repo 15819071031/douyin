@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.smart.ocr.gui.MainController"
+            styleClass="root-pane">
+
+    <!-- 中间内容区 - TabPane -->
+    <center>
+        <TabPane fx:id="mainTabPane" styleClass="main-tabs">
+            <!-- Tab1: OCR识别 -->
+            <Tab text="OCR识别" closable="false">
+                <BorderPane>
+                    <!-- OCR工具栏 -->
+                    <top>
+                        <HBox styleClass="toolbar" spacing="10" alignment="CENTER_LEFT">
+                            <padding>
+                                <Insets top="10" right="15" bottom="10" left="15"/>
+                            </padding>
+                            
+                            <Button fx:id="screenshotBtn" text="截图识别" styleClass="primary-btn" onAction="#startScreenshot">
+                                <tooltip><Tooltip text="快捷键: F4"/></tooltip>
+                            </Button>
+                            <Button fx:id="fileBtn" text="打开图片" styleClass="default-btn" onAction="#openFile"/>
+                            <Button fx:id="clipboardBtn" text="剪贴板识别" styleClass="default-btn" onAction="#recognizeClipboard"/>
+                            
+                            <Separator orientation="VERTICAL"/>
+                            
+                            <Button fx:id="copyBtn" text="复制结果" styleClass="default-btn" onAction="#copyResult"/>
+                            <CheckBox fx:id="autoCopyCheckBox" text="自动复制" styleClass="checkbox"/>
+                            
+                            <Separator orientation="VERTICAL"/>
+                            
+                            <Button fx:id="optimizeBtn" text="AI优化" styleClass="ai-btn" onAction="#optimizeText"/>
+                            <ComboBox fx:id="translateLangCombo" prefWidth="100"/>
+                            <Button fx:id="translateBtn" text="翻译" styleClass="ai-btn" onAction="#translateText"/>
+                            
+                            <Region HBox.hgrow="ALWAYS"/>
+                            
+                            <ProgressBar fx:id="progressBar" visible="false" prefWidth="120"/>
+                        </HBox>
+                    </top>
+                    
+                    <!-- OCR内容区 -->
+                    <center>
+                        <SplitPane dividerPositions="0.4" styleClass="content-split">
+                            <VBox styleClass="preview-pane" spacing="10">
+                                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                                <Label text="图片预览" styleClass="section-title"/>
+                                <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="preview-scroll">
+                                    <ImageView fx:id="previewImageView" preserveRatio="true" fitWidth="400"/>
+                                </ScrollPane>
+                            </VBox>
+                            <VBox styleClass="result-pane" spacing="10">
+                                <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <Label text="识别结果" styleClass="section-title"/>
+                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Label fx:id="charCountLabel" text="0 字符" styleClass="char-count"/>
+                                </HBox>
+                                <TextArea fx:id="resultTextArea" wrapText="true" VBox.vgrow="ALWAYS" 
+                                          styleClass="result-textarea" promptText="识别结果将显示在这里..."/>
+                            </VBox>
+                        </SplitPane>
+                    </center>
+                    
+                    <!-- 历史记录侧边栏 -->
+                    <right>
+                        <VBox prefWidth="250" styleClass="history-pane" spacing="10">
+                            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                            <Label text="历史记录" styleClass="section-title"/>
+                            <HBox spacing="5">
+                                <TextField fx:id="searchField" promptText="搜索..." HBox.hgrow="ALWAYS" 
+                                           onAction="#searchHistory" styleClass="search-field"/>
+                                <Button text="搜" onAction="#searchHistory" styleClass="small-btn"/>
+                            </HBox>
+                            <ListView fx:id="historyListView" VBox.vgrow="ALWAYS" styleClass="history-list"
+                                      onMouseClicked="#onHistoryClick"/>
+                            <Button text="清空历史" onAction="#clearHistory" styleClass="danger-btn" maxWidth="Infinity"/>
+                        </VBox>
+                    </right>
+                </BorderPane>
+            </Tab>
+            
+            <!-- Tab2: 抖音刷视频 -->
+            <Tab text="抖音刷视频" closable="false">
+                <BorderPane styleClass="douyin-pane">
+                    <!-- 抖音工具栏 -->
+                    <top>
+                        <HBox styleClass="toolbar" spacing="15" alignment="CENTER_LEFT">
+                            <padding><Insets top="12" right="15" bottom="12" left="15"/></padding>
+                            
+                            <Label text="视频数量:" styleClass="label"/>
+                            <Spinner fx:id="videoCountSpinner" prefWidth="80" editable="true"/>
+                            
+                            <Separator orientation="VERTICAL"/>
+                            
+                            <Label text="关键词:" styleClass="label"/>
+                            <TextField fx:id="keywordsField" prefWidth="250" promptText="幸福,女性,独立,情感" styleClass="search-field"/>
+                            
+                            <Separator orientation="VERTICAL"/>
+                            
+                            <Button fx:id="startBrowseBtn" text="开始刷视频" styleClass="primary-btn" onAction="#startDouyinBrowse"/>
+                            <Button fx:id="stopBrowseBtn" text="停止" styleClass="danger-btn" onAction="#stopDouyinBrowse" disable="true"/>
+                            
+                            <Region HBox.hgrow="ALWAYS"/>
+                            
+                            <Label fx:id="deviceStatusLabel" text="设备状态: 未连接" styleClass="status-text"/>
+                            <Button text="检测设备" styleClass="small-btn" onAction="#checkDevice"/>
+                        </HBox>
+                    </top>
+                    
+                    <!-- 刷视频结果区 -->
+                    <center>
+                        <VBox spacing="10" styleClass="result-pane">
+                            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                            
+                            <HBox alignment="CENTER_LEFT" spacing="15">
+                                <Label text="刷视频记录" styleClass="section-title"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Label fx:id="browseProgressLabel" text="进度: 0/0" styleClass="char-count"/>
+                                <Label fx:id="likeCountLabel" text="点赞: 0" styleClass="char-count" style="-fx-text-fill: #f56c6c;"/>
+                                <ProgressBar fx:id="browseProgressBar" prefWidth="150" visible="false"/>
+                            </HBox>
+                            
+                            <TableView fx:id="browseResultTable" VBox.vgrow="ALWAYS" styleClass="result-table">
+                                <columns>
+                                    <TableColumn fx:id="colIndex" text="序号" prefWidth="60"/>
+                                    <TableColumn fx:id="colText" text="识别文字" prefWidth="350"/>
+                                    <TableColumn fx:id="colKeywords" text="匹配关键词" prefWidth="150"/>
+                                    <TableColumn fx:id="colLiked" text="点赞" prefWidth="60"/>
+                                    <TableColumn fx:id="colStatus" text="状态" prefWidth="120"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                    </center>
+                    
+                    <!-- 使用说明侧边栏 -->
+                    <right>
+                        <VBox prefWidth="250" styleClass="history-pane" spacing="10">
+                            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+                            <Label text="使用说明" styleClass="section-title"/>
+                            <TextArea wrapText="true" editable="false" VBox.vgrow="ALWAYS" styleClass="help-textarea">
+                                <text>1. 确保手机已连接ADB
+   - 打开开发者选项
+   - 启用USB调试
+   - 执行 adb devices 检查
+
+2. 打开抖音APP到推荐页
+
+3. 设置参数:
+   - 视频数量: 要刷的视频个数
+   - 关键词: 用逗号分隔
+
+4. 点击「开始刷视频」
+
+5. 程序会自动:
+   - 截图识别视频文字
+   - 匹配关键词
+   - 符合条件则点赞
+   - 滑动到下一个视频
+
+默认关键词:
+幸福、女性、独立、情感
+
+提示:
+- 点赞按钮坐标可在配置文件中调整
+- 请确保手机屏幕常亮</text>
+                            </TextArea>
+                            <Button text="清空记录" onAction="#clearBrowseResults" styleClass="danger-btn" maxWidth="Infinity"/>
+                        </VBox>
+                    </right>
+                </BorderPane>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <!-- 底部状态栏 -->
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="10">
+            <padding><Insets top="8" right="15" bottom="8" left="15"/></padding>
+            <Label fx:id="statusLabel" text="就绪 | 按 F4 快速截图识别" styleClass="status-text"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="SmartOCR v1.0" styleClass="version-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

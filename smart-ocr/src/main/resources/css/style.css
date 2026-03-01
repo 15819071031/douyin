@@ -1,0 +1,406 @@
+/* SmartOCR 样式表 */
+
+/* 根面板 */
+.root-pane {
+    -fx-background-color: #f5f7fa;
+}
+
+/* 工具栏 */
+.toolbar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ed;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* 主按钮样式 */
+.primary-btn {
+    -fx-background-color: #409eff;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+}
+
+.primary-btn:hover {
+    -fx-background-color: #66b1ff;
+}
+
+.primary-btn:pressed {
+    -fx-background-color: #3a8ee6;
+}
+
+.primary-btn:disabled {
+    -fx-background-color: #a0cfff;
+    -fx-opacity: 0.7;
+}
+
+/* 默认按钮样式 */
+.default-btn {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #606266;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+    -fx-border-color: #dcdfe6;
+    -fx-border-radius: 4;
+}
+
+.default-btn:hover {
+    -fx-background-color: #ecf5ff;
+    -fx-text-fill: #409eff;
+    -fx-border-color: #c6e2ff;
+}
+
+.default-btn:pressed {
+    -fx-background-color: #d9ecff;
+}
+
+/* AI按钮样式 */
+.ai-btn {
+    -fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+}
+
+.ai-btn:hover {
+    -fx-background-color: linear-gradient(to right, #7c8ff0, #8e63b3);
+}
+
+.ai-btn:disabled {
+    -fx-background-color: #c0c4cc;
+    -fx-opacity: 0.7;
+}
+
+/* 小按钮 */
+.small-btn {
+    -fx-background-color: #409eff;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 6 12;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+}
+
+.small-btn:hover {
+    -fx-background-color: #66b1ff;
+}
+
+/* 危险按钮 */
+.danger-btn {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #f56c6c;
+    -fx-font-size: 12px;
+    -fx-padding: 6 12;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+    -fx-border-color: #fbc4c4;
+    -fx-border-radius: 4;
+}
+
+.danger-btn:hover {
+    -fx-background-color: #fef0f0;
+    -fx-border-color: #f56c6c;
+}
+
+/* 分割面板 */
+.content-split {
+    -fx-background-color: transparent;
+}
+
+.content-split > .split-pane-divider {
+    -fx-background-color: #e4e7ed;
+    -fx-padding: 0 2;
+}
+
+/* 预览面板 */
+.preview-pane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+}
+
+.preview-scroll {
+    -fx-background-color: #f5f7fa;
+    -fx-background-radius: 4;
+    -fx-border-color: #e4e7ed;
+    -fx-border-radius: 4;
+}
+
+.preview-scroll > .viewport {
+    -fx-background-color: #f5f7fa;
+}
+
+/* 结果面板 */
+.result-pane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+}
+
+/* 结果文本区 */
+.result-textarea {
+    -fx-font-size: 14px;
+    -fx-font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdfe6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 10;
+}
+
+.result-textarea:focused {
+    -fx-border-color: #409eff;
+}
+
+.result-textarea .content {
+    -fx-background-color: #ffffff;
+}
+
+/* 历史面板 */
+.history-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ed;
+    -fx-border-width: 0 0 0 1;
+}
+
+/* 历史列表 */
+.history-list {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ed;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.history-list .list-cell {
+    -fx-font-size: 12px;
+    -fx-padding: 8 10;
+    -fx-text-fill: #606266;
+}
+
+.history-list .list-cell:filled:selected {
+    -fx-background-color: #ecf5ff;
+    -fx-text-fill: #409eff;
+}
+
+.history-list .list-cell:filled:hover {
+    -fx-background-color: #f5f7fa;
+}
+
+/* 搜索框 */
+.search-field {
+    -fx-font-size: 12px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdfe6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 6 10;
+}
+
+.search-field:focused {
+    -fx-border-color: #409eff;
+}
+
+/* 状态栏 */
+.status-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ed;
+    -fx-border-width: 1 0 0 0;
+}
+
+.status-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #909399;
+}
+
+.version-text {
+    -fx-font-size: 11px;
+    -fx-text-fill: #c0c4cc;
+}
+
+/* 标题样式 */
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #303133;
+}
+
+/* 字数统计 */
+.char-count {
+    -fx-font-size: 12px;
+    -fx-text-fill: #909399;
+}
+
+/* 复选框 */
+.checkbox {
+    -fx-font-size: 13px;
+    -fx-text-fill: #606266;
+}
+
+.checkbox:selected > .box {
+    -fx-background-color: #409eff;
+    -fx-border-color: #409eff;
+}
+
+/* 下拉框 */
+.combo-box {
+    -fx-font-size: 13px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdfe6;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.combo-box:hover {
+    -fx-border-color: #c0c4cc;
+}
+
+.combo-box:focused {
+    -fx-border-color: #409eff;
+}
+
+/* 进度条 */
+.progress-bar {
+    -fx-accent: #409eff;
+    -fx-background-color: #e4e7ed;
+    -fx-background-radius: 4;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(to right, #409eff, #66b1ff);
+    -fx-background-radius: 4;
+}
+
+/* 分隔符 */
+.separator {
+    -fx-background-color: #e4e7ed;
+}
+
+/* 滚动条 */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #c0c4cc;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #909399;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+/* 工具提示 */
+.tooltip {
+    -fx-background-color: #303133;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 6 10;
+    -fx-background-radius: 4;
+}
+
+/* ==================== 抖音刷视频界面样式 ==================== */
+
+/* Tab样式 */
+.main-tabs > .tab-header-area {
+    -fx-background-color: #ffffff;
+}
+
+.main-tabs > .tab-header-area > .tab-header-background {
+    -fx-background-color: #ffffff;
+}
+
+.main-tabs .tab {
+    -fx-background-color: #ffffff;
+    -fx-padding: 8 20;
+}
+
+.main-tabs .tab:selected {
+    -fx-background-color: #ecf5ff;
+}
+
+.main-tabs .tab .tab-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #606266;
+}
+
+.main-tabs .tab:selected .tab-label {
+    -fx-text-fill: #409eff;
+    -fx-font-weight: bold;
+}
+
+/* 抖音面板 */
+.douyin-pane {
+    -fx-background-color: #f5f7fa;
+}
+
+/* 结果表格 */
+.result-table {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ed;
+    -fx-border-radius: 4;
+}
+
+.result-table .column-header {
+    -fx-background-color: #fafafa;
+    -fx-border-color: #e4e7ed;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.result-table .table-cell {
+    -fx-font-size: 12px;
+    -fx-text-fill: #606266;
+    -fx-padding: 8 10;
+}
+
+.result-table .table-row-cell:odd {
+    -fx-background-color: #fafafa;
+}
+
+.result-table .table-row-cell:selected {
+    -fx-background-color: #ecf5ff;
+}
+
+/* 帮助文本区 */
+.help-textarea {
+    -fx-font-size: 12px;
+    -fx-font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    -fx-background-color: #f5f7fa;
+    -fx-border-color: #e4e7ed;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: #606266;
+}
+
+.help-textarea .content {
+    -fx-background-color: #f5f7fa;
+}
+
+/* Spinner样式 */
+.spinner {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdfe6;
+    -fx-border-radius: 4;
+}
+
+.spinner:focused {
+    -fx-border-color: #409eff;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #f5f7fa;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #e4e7ed;
+}
