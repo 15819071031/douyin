@@ -4,43 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de0a90e6-44da-4c93-b980-78a1956ab820" name="更改" comment="刷视频功能">
-      <change afterPath="$PROJECT_DIR$/.idea/.cache/.Apifox_Helper/.toolWindow.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/SmartOcrApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/SmartOcrGuiApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/SmartOcrLauncher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/config/AdbConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/config/AiConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/config/AppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/config/DatabaseInitConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/config/MybatisPlusConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/config/OcrConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/dto/OcrResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/dto/VideoScanResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/entity/OcrHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/gui/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/mapper/OcrHistoryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/service/AiService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/service/DouyinBrowseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/service/HistoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/service/HotkeyService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/service/OcrService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/util/AdbUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/util/ClipboardUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/java/com/smart/ocr/util/ScreenshotUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/resources/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/resources/db/init.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smart-ocr/src/main/resources/fxml/main.fxml" afterDir="false" />
+    <list default="true" id="de0a90e6-44da-4c93-b980-78a1956ab820" name="更改" comment="刷视频">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kai/douyin/gui/GuiCoordinateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kai/douyin/gui/GuiCoordinateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kai/douyin/gui/GuiRpaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kai/douyin/gui/GuiRpaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kai/douyin/gui/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kai/douyin/gui/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1772094527620</updated>
       <workItem from="1772094528742" duration="18740000" />
-      <workItem from="1772241199429" duration="12364000" />
+      <workItem from="1772241199429" duration="12808000" />
     </task>
     <task id="LOCAL-00001" summary="初始化">
       <option name="closed" value="true" />
@@ -175,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772348196107</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="刷视频">
+      <option name="closed" value="true" />
+      <created>1772349371581</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1772349371581</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +173,8 @@
     <MESSAGE value="初始化" />
     <MESSAGE value="手机" />
     <MESSAGE value="刷视频功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="刷视频功能" />
+    <MESSAGE value="刷视频" />
+    <option name="LAST_COMMIT_MESSAGE" value="刷视频" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

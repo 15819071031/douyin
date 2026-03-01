@@ -10,10 +10,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * GUI专用RPA服务
@@ -98,6 +104,28 @@ public class GuiRpaService {
         logInfo("点击关注按钮: (" + config.getFollowBtnX() + ", " + config.getFollowBtnY() + ")");
         adbCommand.tap(config.getFollowBtnX(), config.getFollowBtnY());
         sleep(800);
+    }
+
+    /**
+     * 双击点赞
+     */
+    public void doubleTapLike() {
+        int centerX = 540; // 屏幕中心X
+        int centerY = 1000; // 屏幕中心Y
+        logInfo("双击点赞");
+        adbCommand.tap(centerX, centerY);
+        sleep(50);
+        adbCommand.tap(centerX, centerY);
+        sleep(500);
+    }
+
+    /**
+     * 点击右侧点赞按钮
+     */
+    public void tapLikeButton() {
+        logInfo("点击点赞按钮: (" + config.getLikeBtnX() + ", " + config.getLikeBtnY() + ")");
+        adbCommand.tap(config.getLikeBtnX(), config.getLikeBtnY());
+        sleep(500);
     }
 
     /**
@@ -344,6 +372,191 @@ public class GuiRpaService {
         log.info(message);
         if (logCallback != null) {
             logCallback.accept(message);
+        }
+    }
+
+    // ==================== 刷视频点赞任务 ====================
+
+    /**
+     * 识别视频中的文字
+     */
+    public String recognizeVideoText() {
+        try {
+            // 截图
+            String screenshotPath = adbCommand.captureScreen("./temp/video_screen.png");
+            if (screenshotPath == null) {
+                logInfo("截图失败");
+                return "";
+            }
+
+            // 读取图片
+            BufferedImage fullImage = ImageIO.read(new File(screenshotPath));
+            if (fullImage == null) {
+                return "";
+            }
+
+            // 裁剪视频文字区域
+            int x = config.getVideoTextAreaX();
+            int y = config.getVideoTextAreaY();
+            int width = Math.min(config.getVideoTextAreaWidth(), fullImage.getWidth() - x);
+            int height = Math.min(config.getVideoTextAreaHeight(), fullImage.getHeight() - y);
+
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (width <= 0 || height <= 0) {
+                logInfo("裁剪区域无效");
+                return "";
+            }
+
+            BufferedImage croppedImage = fullImage.getSubimage(x, y, width, height);
+            
+            // 保存裁剪后的图片用于OCR
+            String croppedPath = "./temp/video_text_area.png";
+            ImageIO.write(croppedImage, "png", new File(croppedPath));
+
+            // OCR识别 - 使用OcrService的方法
+            var result = ocrService.captureAndRecognizeComments();
+            StringBuilder sb = new StringBuilder();
+            for (var comment : result) {
+                sb.append(comment.getContent()).append(" ");
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            logInfo("识别视频文字失败: " + e.getMessage());
+            return "";
+        }
+    }
+
+    /**
+     * 关键词匹配
+     */
+    public List<String> matchKeywords(String text, List<String> keywords) {
+        List<String> matched = new ArrayList<>();
+        if (text == null || text.isEmpty()) {
+            return matched;
+        }
+
+        String lowerText = text.toLowerCase();
+        for (String keyword : keywords) {
+            if (lowerText.contains(keyword.toLowerCase())) {
+                matched.add(keyword);
+            }
+        }
+        return matched;
+    }
+
+    /**
+     * 执行刷视频点赞任务
+     * @param videoCount 视频数量
+     * @param keywordsStr 关键词（逗号分隔）
+     * @param progressCallback 进度回调
+     */
+    public void runBrowseAndLikeTask(int videoCount, String keywordsStr, Consumer<BrowseResult> progressCallback) {
+        running = true;
+        
+        // 解析关键词
+        List<String> keywords = Arrays.stream(keywordsStr.split("[,，]"))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+        
+        if (keywords.isEmpty()) {
+            keywords = Arrays.asList("幸福", "女性", "独立", "情感");
+        }
+
+        logInfo("========================================");
+        logInfo("开始执行刷视频点赞任务");
+        logInfo("目标视频数: " + videoCount);
+        logInfo("关键词: " + keywords);
+        logInfo("========================================");
+
+        if (!adbCommand.isDeviceConnected()) {
+            logInfo("ADB设备未连接，任务终止");
+            running = false;
+            return;
+        }
+
+        int likedCount = 0;
+        int scannedCount = 0;
+
+        for (int i = 0; i < videoCount && running; i++) {
+            scannedCount++;
+            BrowseResult result = new BrowseResult();
+            result.videoIndex = i + 1;
+            result.totalCount = videoCount;
+
+            try {
+                logInfo("----- 处理第 " + (i + 1) + "/" + videoCount + " 个视频 -----");
+
+                // 等待视频加载
+                sleep(1500);
+
+                // 截图并OCR识别
+                String recognizedText = recognizeVideoText();
+                result.recognizedText = recognizedText;
+                logInfo("识别到文字: " + (recognizedText.length() > 50 ? recognizedText.substring(0, 50) + "..." : recognizedText));
+
+                // 关键词匹配
+                List<String> matchedKeywords = matchKeywords(recognizedText, keywords);
+                result.matchedKeywords = matchedKeywords;
+
+                // 如果匹配到关键词，点赞
+                if (!matchedKeywords.isEmpty()) {
+                    doubleTapLike();
+                    result.liked = true;
+                    likedCount++;
+                    logInfo("✓ 匹配关键词: " + matchedKeywords + "，已点赞！");
+                } else {
+                    result.liked = false;
+                    logInfo("✗ 未匹配关键词，跳过");
+                }
+
+                result.success = true;
+                result.message = result.liked ? "匹配: " + String.join(",", matchedKeywords) : "未匹配";
+
+            } catch (Exception e) {
+                logInfo("处理视频失败: " + e.getMessage());
+                result.success = false;
+                result.message = "处理失败: " + e.getMessage();
+            }
+
+            // 回调进度
+            if (progressCallback != null) {
+                progressCallback.accept(result);
+            }
+
+            // 滑动到下一个视频
+            if (i < videoCount - 1 && running) {
+                swipeToNextVideo();
+            }
+        }
+
+        logInfo("========================================");
+        logInfo("刷视频任务完成");
+        logInfo("共扫描: " + scannedCount + " 个视频");
+        logInfo("共点赞: " + likedCount + " 个视频");
+        logInfo("========================================");
+        running = false;
+    }
+
+    /**
+     * 刷视频结果
+     */
+    public static class BrowseResult {
+        public int videoIndex;
+        public int totalCount;
+        public boolean success;
+        public String message;
+        public String recognizedText;
+        public List<String> matchedKeywords;
+        public boolean liked;
+
+        public String getTextPreview() {
+            if (recognizedText == null || recognizedText.isEmpty()) {
+                return "(无文字)";
+            }
+            String cleaned = recognizedText.replaceAll("\\s+", " ").trim();
+            return cleaned.length() > 30 ? cleaned.substring(0, 30) + "..." : cleaned;
         }
     }
 }

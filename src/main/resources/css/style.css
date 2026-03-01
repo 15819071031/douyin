@@ -139,6 +139,21 @@
     -fx-background-color: #8e44ad;
 }
 
+/* 刷视频按钮 - 橙色 */
+.browse-btn {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.browse-btn:hover {
+    -fx-background-color: #e67e22;
+}
+
+.browse-btn:pressed {
+    -fx-background-color: #d35400;
+}
+
 /* 禁用状态 */
 .button:disabled {
     -fx-opacity: 0.6;

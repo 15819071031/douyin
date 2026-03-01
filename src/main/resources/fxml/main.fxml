@@ -107,6 +107,36 @@
                     </VBox>
                 </TitledPane>
                 
+                <!-- 刷视频点赞配置 -->
+                <TitledPane text="刷视频点赞配置" expanded="true" collapsible="true">
+                    <VBox spacing="8">
+                        <padding><Insets topRightBottomLeft="10"/></padding>
+                        
+                        <Label text="刷视频数量:"/>
+                        <TextField fx:id="browseVideoCountField" promptText="默认10"/>
+                        
+                        <Label text="关键词 (逗号分隔):"/>
+                        <TextField fx:id="browseKeywordsField" promptText="幸福,女性,独立,情感"/>
+                        
+                        <Label text="点赞按钮坐标:" styleClass="section-label"/>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="X:"/>
+                            <TextField fx:id="likeBtnXField" prefWidth="80"/>
+                            <Label text="Y:"/>
+                            <TextField fx:id="likeBtnYField" prefWidth="80"/>
+                        </HBox>
+                        
+                        <Separator/>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="进度:"/>
+                            <Label fx:id="browseProgressLabel" text="0/0" styleClass="status-label"/>
+                            <Label text="已点赞:"/>
+                            <Label fx:id="likeCountLabel" text="0" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                
                 <!-- 保存配置按钮 -->
                 <Button text="保存配置" onAction="#saveConfig" styleClass="secondary-btn" maxWidth="Infinity"/>
                 
@@ -127,11 +157,13 @@
                     <!-- 主要任务按钮 -->
                     <HBox spacing="15" alignment="CENTER">
                         <Button fx:id="startAiTaskBtn" text="启动AI评论任务" 
-                                styleClass="success-btn" prefWidth="180" prefHeight="45"/>
+                                styleClass="success-btn" prefWidth="150" prefHeight="45"/>
                         <Button fx:id="startFollowTaskBtn" text="启动互关互评任务" 
-                                styleClass="primary-btn" prefWidth="180" prefHeight="45"/>
+                                styleClass="primary-btn" prefWidth="150" prefHeight="45"/>
+                        <Button fx:id="startBrowseTaskBtn" text="启动刷视频点赞" 
+                                styleClass="browse-btn" prefWidth="150" prefHeight="45"/>
                         <Button fx:id="stopTaskBtn" text="停止任务" 
-                                styleClass="danger-btn" prefWidth="120" prefHeight="45"/>
+                                styleClass="danger-btn" prefWidth="100" prefHeight="45"/>
                     </HBox>
                     
                     <Separator/>

@@ -52,11 +52,20 @@ public class MainController implements Initializable {
     // ==================== 控制按钮 ====================
     @FXML private Button startAiTaskBtn;
     @FXML private Button startFollowTaskBtn;
+    @FXML private Button startBrowseTaskBtn;
     @FXML private Button stopTaskBtn;
     @FXML private Button testOcrBtn;
     @FXML private Button testSwipeBtn;
     @FXML private Button testOpenCommentBtn;
     @FXML private Button testCloseCommentBtn;
+    
+    // ==================== 刷视频配置 ====================
+    @FXML private TextField browseVideoCountField;
+    @FXML private TextField browseKeywordsField;
+    @FXML private TextField likeBtnXField;
+    @FXML private TextField likeBtnYField;
+    @FXML private Label browseProgressLabel;
+    @FXML private Label likeCountLabel;
     
     // ==================== 日志显示 ====================
     @FXML private TextArea logArea;
@@ -110,6 +119,12 @@ public class MainController implements Initializable {
         videoCountField.setText("10");
         commentTextField.setText("互关互关");
         intervalField.setText("3000");
+        
+        // 刷视频配置
+        browseVideoCountField.setText("10");
+        browseKeywordsField.setText("幸福,女性,独立,情感");
+        likeBtnXField.setText("980");
+        likeBtnYField.setText("880");
     }
 
     /**
@@ -124,6 +139,9 @@ public class MainController implements Initializable {
         
         // 启动互关互评任务
         startFollowTaskBtn.setOnAction(e -> startFollowCommentTask());
+        
+        // 启动刷视频点赞任务
+        startBrowseTaskBtn.setOnAction(e -> startBrowseAndLikeTask());
         
         // 停止任务
         stopTaskBtn.setOnAction(e -> stopCurrentTask());
@@ -238,6 +256,67 @@ public class MainController implements Initializable {
             }
         });
         currentTask.start();
+    }
+
+    /**
+     * 启动刷视频点赞任务
+     */
+    private void startBrowseAndLikeTask() {
+        if (taskRunning) {
+            showAlert("提示", "任务正在运行中");
+            return;
+        }
+        
+        // 更新坐标配置
+        updateCoordinateConfig();
+        updateBrowseConfig();
+        
+        int videoCount = parseIntOrDefault(browseVideoCountField.getText(), 10);
+        String keywords = browseKeywordsField.getText().trim();
+        if (keywords.isEmpty()) {
+            keywords = "幸福,女性,独立,情感";
+        }
+        
+        final String finalKeywords = keywords;
+        appendLog("启动刷视频点赞任务，目标视频数: " + videoCount + "，关键词: " + finalKeywords);
+        setTaskRunning(true);
+        
+        // 重置进度显示
+        Platform.runLater(() -> {
+            browseProgressLabel.setText("0/" + videoCount);
+            likeCountLabel.setText("0");
+        });
+        
+        final int[] likedCount = {0};
+        
+        currentTask = new Thread(() -> {
+            try {
+                guiRpaService.runBrowseAndLikeTask(videoCount, finalKeywords, result -> {
+                    Platform.runLater(() -> {
+                        // 更新进度
+                        browseProgressLabel.setText(result.videoIndex + "/" + result.totalCount);
+                        if (result.liked) {
+                            likedCount[0]++;
+                            likeCountLabel.setText(String.valueOf(likedCount[0]));
+                        }
+                    });
+                });
+            } catch (Exception ex) {
+                Platform.runLater(() -> appendLog("任务异常: " + ex.getMessage()));
+            } finally {
+                Platform.runLater(() -> setTaskRunning(false));
+            }
+        });
+        currentTask.start();
+    }
+    
+    /**
+     * 更新刷视频配置
+     */
+    private void updateBrowseConfig() {
+        coordinateConfig.setLikeBtnX(parseIntOrDefault(likeBtnXField.getText(), 980));
+        coordinateConfig.setLikeBtnY(parseIntOrDefault(likeBtnYField.getText(), 880));
+        coordinateConfig.setBrowseKeywords(browseKeywordsField.getText().trim());
     }
 
     /**

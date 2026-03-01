@@ -39,6 +39,28 @@ public class GuiCoordinateConfig {
     /** 关注按钮Y坐标 */
     private int followBtnY = 1066;
     
+    // ==================== 点赞按钮坐标 ====================
+    
+    /** 点赞按钮X坐标（右侧） */
+    private int likeBtnX = 980;
+    
+    /** 点赞按钮Y坐标 */
+    private int likeBtnY = 880;
+    
+    // ==================== 视频文字识别区域 ====================
+    
+    /** 视频文字区域X起点 */
+    private int videoTextAreaX = 50;
+    
+    /** 视频文字区域Y起点 */
+    private int videoTextAreaY = 400;
+    
+    /** 视频文字区域宽度 */
+    private int videoTextAreaWidth = 900;
+    
+    /** 视频文字区域高度 */
+    private int videoTextAreaHeight = 1200;
+    
     // ==================== 任务配置 ====================
     
     /** 处理视频数量 */
@@ -49,6 +71,9 @@ public class GuiCoordinateConfig {
     
     /** 操作间隔（毫秒） */
     private long intervalMs = 3000;
+    
+    /** 刷视频关键词（逗号分隔） */
+    private String browseKeywords = "幸福,女性,独立,情感";
     
     /**
      * 从字符串解析整数，失败返回默认值
