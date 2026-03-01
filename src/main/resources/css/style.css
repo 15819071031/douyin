@@ -1,0 +1,246 @@
+/* 主容器 */
+.main-container {
+    -fx-background-color: #f5f6fa;
+}
+
+/* 顶部标题栏 */
+.header {
+    -fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);
+}
+
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.status-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2ecc71;
+    -fx-font-weight: bold;
+}
+
+.header .label {
+    -fx-text-fill: white;
+}
+
+/* 配置面板 */
+.config-panel {
+    -fx-background-color: #ffffff;
+}
+
+/* TitledPane 样式 */
+.titled-pane {
+    -fx-text-fill: #2c3e50;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #ecf0f1;
+    -fx-font-weight: bold;
+}
+
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: #34495e;
+}
+
+.titled-pane > .content {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 0 1 1 1;
+}
+
+/* 文本输入框 */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 8;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.3), 5, 0, 0, 0);
+}
+
+/* 按钮基础样式 */
+.button {
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-padding: 8 16;
+}
+
+/* 主要按钮 - 蓝色 */
+.primary-btn {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.primary-btn:hover {
+    -fx-background-color: #2980b9;
+}
+
+.primary-btn:pressed {
+    -fx-background-color: #1a5276;
+}
+
+/* 成功按钮 - 绿色 */
+.success-btn {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.success-btn:hover {
+    -fx-background-color: #229954;
+}
+
+.success-btn:pressed {
+    -fx-background-color: #1e8449;
+}
+
+/* 危险按钮 - 红色 */
+.danger-btn {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.danger-btn:hover {
+    -fx-background-color: #c0392b;
+}
+
+.danger-btn:pressed {
+    -fx-background-color: #a93226;
+}
+
+/* 次要按钮 - 灰色 */
+.secondary-btn {
+    -fx-background-color: #95a5a6;
+    -fx-text-fill: white;
+}
+
+.secondary-btn:hover {
+    -fx-background-color: #7f8c8d;
+}
+
+/* 测试按钮 */
+.test-btn {
+    -fx-background-color: #9b59b6;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+}
+
+.test-btn:hover {
+    -fx-background-color: #8e44ad;
+}
+
+/* 禁用状态 */
+.button:disabled {
+    -fx-opacity: 0.6;
+    -fx-cursor: default;
+}
+
+/* 分隔线 */
+.separator .line {
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* 进度条 */
+.progress-bar {
+    -fx-pref-height: 12;
+    -fx-background-radius: 6;
+}
+
+.progress-bar > .track {
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 6;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+    -fx-background-radius: 6;
+    -fx-background-insets: 0;
+}
+
+/* 日志区域 */
+.log-area {
+    -fx-font-family: "Consolas", "Microsoft YaHei", monospace;
+    -fx-font-size: 12px;
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: #ecf0f1;
+    -fx-control-inner-background: #2c3e50;
+}
+
+.log-area .content {
+    -fx-background-color: #2c3e50;
+}
+
+.log-area .scroll-pane {
+    -fx-background-color: #2c3e50;
+}
+
+.log-area .scroll-pane .viewport {
+    -fx-background-color: #2c3e50;
+}
+
+/* 滚动条样式 */
+.scroll-bar {
+    -fx-background-color: #ecf0f1;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #bdc3c7;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #95a5a6;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* 滚动面板 */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* 分区标签 */
+.section-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e;
+}
+
+/* 标签通用样式 */
+.label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 13px;
+}
+
+/* 工具提示 */
+.tooltip {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 4;
+}

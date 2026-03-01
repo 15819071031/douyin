@@ -43,6 +43,8 @@ ocr:
   comment-area-width: 800     # 只截取文字部分，不包括右侧点赞图标
   comment-area-height: 1400   # 评论区域高度
 
+# https://github.com/UB-Mannheim/tesseract/wiki
+
 # 抖音 RPA 配置
 douyin:
   comment:

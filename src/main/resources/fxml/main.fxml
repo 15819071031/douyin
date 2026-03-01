@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kai.douyin.gui.MainController"
+            styleClass="main-container">
+    
+    <!-- 顶部标题 -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <padding><Insets top="15" bottom="15" left="20" right="20"/></padding>
+            <Label text="抖音自动评论助手" styleClass="title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="状态:" />
+            <Label fx:id="statusLabel" text="空闲" styleClass="status-label"/>
+        </HBox>
+    </top>
+    
+    <!-- 左侧配置面板 -->
+    <left>
+        <ScrollPane fitToWidth="true" prefWidth="350">
+            <VBox spacing="15" styleClass="config-panel">
+                <padding><Insets topRightBottomLeft="15"/></padding>
+                
+                <!-- 设备配置 -->
+                <TitledPane text="设备配置" expanded="true" collapsible="false">
+                    <VBox spacing="10">
+                        <padding><Insets topRightBottomLeft="10"/></padding>
+                        
+                        <Label text="设备ID (Device ID):"/>
+                        <TextField fx:id="deviceIdField" promptText="例如: 192.168.1.100:5555"/>
+                        
+                        <Label text="ADB路径:"/>
+                        <TextField fx:id="adbPathField" promptText="例如: D:/adb/adb.exe"/>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button fx:id="connectBtn" text="连接设备" styleClass="primary-btn"/>
+                            <Label text="连接状态:"/>
+                            <Label fx:id="connectionStatus" text="未连接"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                
+                <!-- 评论区坐标配置 -->
+                <TitledPane text="评论区坐标配置" expanded="true" collapsible="true">
+                    <VBox spacing="8">
+                        <padding><Insets topRightBottomLeft="10"/></padding>
+                        
+                        <Label text="评论图标位置:" styleClass="section-label"/>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="X:"/>
+                            <TextField fx:id="commentIconXField" prefWidth="80"/>
+                            <Label text="Y:"/>
+                            <TextField fx:id="commentIconYField" prefWidth="80"/>
+                        </HBox>
+                        
+                        <Label text="评论输入框位置:" styleClass="section-label"/>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="X:"/>
+                            <TextField fx:id="commentInputXField" prefWidth="80"/>
+                            <Label text="Y:"/>
+                            <TextField fx:id="commentInputYField" prefWidth="80"/>
+                        </HBox>
+                        
+                        <Label text="发送按钮位置:" styleClass="section-label"/>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="X:"/>
+                            <TextField fx:id="sendBtnXField" prefWidth="80"/>
+                            <Label text="Y:"/>
+                            <TextField fx:id="sendBtnYField" prefWidth="80"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                
+                <!-- 互关互评坐标配置 -->
+                <TitledPane text="关注按钮坐标" expanded="false" collapsible="true">
+                    <VBox spacing="8">
+                        <padding><Insets topRightBottomLeft="10"/></padding>
+                        
+                        <Label text="关注按钮位置:" styleClass="section-label"/>
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="X:"/>
+                            <TextField fx:id="followBtnXField" prefWidth="80"/>
+                            <Label text="Y:"/>
+                            <TextField fx:id="followBtnYField" prefWidth="80"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                
+                <!-- 任务配置 -->
+                <TitledPane text="任务配置" expanded="true" collapsible="true">
+                    <VBox spacing="8">
+                        <padding><Insets topRightBottomLeft="10"/></padding>
+                        
+                        <Label text="处理视频数量:"/>
+                        <TextField fx:id="videoCountField" promptText="默认10"/>
+                        
+                        <Label text="评论内容 (互关互评用):"/>
+                        <TextField fx:id="commentTextField" promptText="互关互关"/>
+                        
+                        <Label text="操作间隔 (毫秒):"/>
+                        <TextField fx:id="intervalField" promptText="默认3000"/>
+                    </VBox>
+                </TitledPane>
+                
+                <!-- 保存配置按钮 -->
+                <Button text="保存配置" onAction="#saveConfig" styleClass="secondary-btn" maxWidth="Infinity"/>
+                
+            </VBox>
+        </ScrollPane>
+    </left>
+    
+    <!-- 中间操作和日志区域 -->
+    <center>
+        <VBox spacing="15">
+            <padding><Insets topRightBottomLeft="15"/></padding>
+            
+            <!-- 操作按钮区域 -->
+            <TitledPane text="任务操作" expanded="true" collapsible="false">
+                <VBox spacing="15">
+                    <padding><Insets topRightBottomLeft="15"/></padding>
+                    
+                    <!-- 主要任务按钮 -->
+                    <HBox spacing="15" alignment="CENTER">
+                        <Button fx:id="startAiTaskBtn" text="启动AI评论任务" 
+                                styleClass="success-btn" prefWidth="180" prefHeight="45"/>
+                        <Button fx:id="startFollowTaskBtn" text="启动互关互评任务" 
+                                styleClass="primary-btn" prefWidth="180" prefHeight="45"/>
+                        <Button fx:id="stopTaskBtn" text="停止任务" 
+                                styleClass="danger-btn" prefWidth="120" prefHeight="45"/>
+                    </HBox>
+                    
+                    <Separator/>
+                    
+                    <!-- 测试按钮 -->
+                    <Label text="单步测试:" styleClass="section-label"/>
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button fx:id="testOcrBtn" text="测试OCR识别" styleClass="test-btn"/>
+                        <Button fx:id="testSwipeBtn" text="测试滑动" styleClass="test-btn"/>
+                        <Button fx:id="testOpenCommentBtn" text="打开评论区" styleClass="test-btn"/>
+                        <Button fx:id="testCloseCommentBtn" text="关闭评论区" styleClass="test-btn"/>
+                    </HBox>
+                    
+                    <!-- 进度条 -->
+                    <ProgressBar fx:id="progressBar" progress="0" maxWidth="Infinity"/>
+                </VBox>
+            </TitledPane>
+            
+            <!-- 日志区域 -->
+            <TitledPane text="运行日志" expanded="true" collapsible="false" VBox.vgrow="ALWAYS">
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <padding><Insets topRightBottomLeft="10"/></padding>
+                    
+                    <TextArea fx:id="logArea" 
+                              editable="false" 
+                              wrapText="true"
+                              styleClass="log-area"
+                              VBox.vgrow="ALWAYS"/>
+                    
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button text="清空日志" onAction="#clearLog" styleClass="secondary-btn"/>
+                    </HBox>
+                </VBox>
+            </TitledPane>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>
