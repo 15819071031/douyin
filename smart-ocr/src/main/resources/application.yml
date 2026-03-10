@@ -68,7 +68,7 @@ ai:
   # 通义千问API Key（请替换为您的API Key）
   api-key: ${DASHSCOPE_API_KEY:}
   # 模型名称
-  model: qwen-plus
+  model: qwen3.5-flash
   # 快速模型
   fast-model: qwen-turbo
   # 请求超时时间（秒）

@@ -22,12 +22,12 @@ public class AiTyUtils {
     private static String totalResult = "";
 
     // 通义大模型名字
-    private static String aliModelName = "qwen-plus";
+    private static String aliModelName = "qwen3.5-flash";
 
     private static String aliQuickModelName = "qwen-turbo";
 
     // 阿里通义大模型认证秘钥
-    private static String aliApiKey = "sk-05bb8ddb7d7147d3a5d443496d095d42";
+    private static String aliApiKey = "sk-65267438ac4041ef80b7fc08cd327a2e";
 
     // 高德地图天气API_KEY
     private static String GaoDeApi = "b9ffa2a325a25b8d8c2ea07721c708c8";

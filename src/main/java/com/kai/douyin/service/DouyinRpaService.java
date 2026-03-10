@@ -320,7 +320,7 @@ public class DouyinRpaService {
             // AI识别评论并生成回复
             List<CommentWithPosition> comments = getCommentsWithAIAndReplies();
             
-            if (comments.isEmpty()) {
+            if (comments.isEmpty() || "NULL".equals(comments.getFirst().getContent())) {
                 log.info("未AI识别到评论，跳过当前视频");
                 closeCommentSection();
                 return;

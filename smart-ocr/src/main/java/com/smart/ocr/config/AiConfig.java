@@ -20,7 +20,7 @@ public class AiConfig {
     /**
      * 模型名称
      */
-    private String model = "qwen-plus";
+    private String model = "qwen3.5-flash";
 
     /**
      * 快速模型（用于简单任务）

@@ -39,8 +39,17 @@ public class QwenVisionService {
     // 识别评论的提示词
     private static final String RECOGNIZE_PROMPT = """
         请仔细分析这张抖音评论区的截图。
-        请只识别第一条评论，不要识别其他评论。
+        请只识别第一条评论（注：
+        1.第一条评论不能是广告。
+        2.若是广告则改为识别第二条评论。
+        3.若是没有其他评论则返回NULL。
+        4.视频同款及更多好物在橱窗里,像这样的评论就是广告。），不要识别其他评论。
         请提取评论的用户名、评论内容、以及"回复"按钮的位置。
+        
+        
+        请识别评论是否带有图片（不要将头像识别成图片），有的话请在后面附上：附赠描述：【图片的描述】。
+        用户发的图片，可能是表情包，也可能是他发的内容。你需要进行识别，
+        
         
         图片尺寸信息：请将图片宽度视为100%%，高度视为100%%
         
@@ -71,7 +80,7 @@ public class QwenVisionService {
                 {
                     "index": 1,
                     "userName": "用户名",
-                    "content": "评论内容",
+                    "content": "评论内容+附赠描述：【】",
                     "replyBtnXPercent": 15,
                     "replyBtnYPercent": 25
                 }
@@ -267,9 +276,11 @@ public class QwenVisionService {
         
         // 为每条评论生成AI回复
         for (CommentWithPosition comment : comments) {
-            if (Boolean.TRUE.equals(comment.getShouldReply())) {
-                String reply = qwenAiService.generateReply(comment.getContent());
-                comment.setAiReply(reply);
+            if (!"NULL".equals(comment.getContent())){
+                if (Boolean.TRUE.equals(comment.getShouldReply())) {
+                    String reply = qwenAiService.generateReply(comment.getContent());
+                    comment.setAiReply(reply);
+                }
             }
         }
         

@@ -13,12 +13,12 @@ spring:
 # ADB 配置
 adb:
   path: D:/adb/adb.exe
-  device-id: 192.168.31.95:37667  # 设备ID，通过 adb devices 查看
+  device-id: 192.168.31.95:37235  # 设备ID，通过 adb devices 查看
 
 # 通义千问配置
 qwen:
-  api-key: "sk-05bb8ddb7d7147d3a5d443496d095d42"
-  model: "qwen-plus"
+  api-key: "sk-65267438ac4041ef80b7fc08cd327a2e"
+  model: "qwen3.5-plus"
 
 # OCR 识别配置
 ocr:
